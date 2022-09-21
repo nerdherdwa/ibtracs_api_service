@@ -1,7 +1,7 @@
 {
-  "name": "dirt-simple-postgis-http-api",
+  "name": "ibtracs-api-service",
   "version": "4.3.2",
-  "description": "The Dirt-Simple PostGIS HTTP API exposes PostGIS functionality to your applications over HTTP.",
+  "description": "The IBTrACS PostGIS HTTP API SERVICE exposes PostGIS functionality to your applications over HTTP.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -18,6 +18,10 @@
     "@fastify/swagger": "^7.6.0",
     "dotenv": "^16.0.2",
     "fastify": "^4.6.0",
+    "fastify-secrets-aws": "^2.0.0",
+    "safe-squel": "^5.12.5",
+    "dbgeo": "^1.1.0",
+    "joi": "^17.6.0",
     "pg": "^8.8.0"
   }
 }
