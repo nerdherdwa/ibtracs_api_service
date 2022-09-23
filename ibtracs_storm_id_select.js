@@ -1,12 +1,8 @@
 const squel = require("safe-squel").useFlavour("postgres")
-const Joi = require("joi")
-const dbgeo = require("dbgeo")
-const storm = require("../sql/storm_queries")
+const storm = require("./sql/storm_queries")
 
 function formatSQL(params, query) {
   var storms = storm.filter_profiles(query.sid)
-
-  console.log(request.query.polygon_points)
 
   var sql = squel
     .select()

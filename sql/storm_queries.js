@@ -1,5 +1,4 @@
 const squel = require("safe-squel").useFlavour("postgres")
-const date_format = require("dateformat")
 
 module.exports = {
   /*

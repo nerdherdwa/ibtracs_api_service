@@ -1,7 +1,9 @@
 const path = require("path")
 const fastify = require("fastify")
+const aws = require("aws-sdk")
 const FastifySecrets = require("fastify-secrets-aws")
 const { builtinModules } = require("module")
+const retrieveSecrets = require("./retrieveSecrets")
 require("dotenv").config()
 
 async function build(opts = {}) {
@@ -11,15 +13,8 @@ async function build(opts = {}) {
   // if (!("POSTGRES_CONNECTION" in process.env)) {
   //   throw new Error("Required ENV variable POSTGRES_CONNECTION is not set. Please see README.md for more information.");
   // }
-
-  await app.register(FastifySecrets, {
-    secrets: {
-      ibtracs: "ibtracs-db-access",
-    },
-  })
-  console.log(app.secrets)
-  const secret = JSON.parse(app.secrets.ibtracs)
-  const connection = `${secret.engine}://${secret.username}:${secret.password}@${secret.host}:${secret.port}/${secret.dbname}`
+  const secret = await retrieveSecrets("dev/wod")
+  const connection = `${secret.engine}://${secret.username}:${secret.password}@10.46.6.206:${secret.port}/${secret.dbname}`
   // POSTGRES CONNECTION
   app.register(require("@fastify/postgres"), {
     connectionString: connection,
@@ -80,7 +75,7 @@ async function build(opts = {}) {
     dir: path.join(__dirname, "routes"),
   })
 
-  return resolve(app)
+  return app
 }
 
 module.exports = build
